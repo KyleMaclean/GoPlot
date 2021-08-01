@@ -1,0 +1,30 @@
+@startuml
+class com.example.goplot.RouteListAdapter {
++ RouteViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(RouteViewHolder,int)
+}
+class com.example.goplot.RouteListAdapter.RouteDiff {
++ boolean areItemsTheSame(Route,Route)
++ boolean areContentsTheSame(Route,Route)
+}
+class com.example.goplot.ListRoutesViewModel {
+~ RouteDao routeDao
+~ LiveData<List<Route>> getAllRoutesOrderedByEndTime()
+}
+class com.example.goplot.ListRoutesActivity {
+# void onCreate(Bundle)
+}
+class com.example.goplot.RouteViewHolder {
+- TextView routeItemView
+~ {static} RouteViewHolder create(ViewGroup)
++ void bind(String)
+}
+
+
+androidx.recyclerview.widget.ListAdapter <|-- com.example.goplot.RouteListAdapter
+com.example.goplot.RouteListAdapter +.. com.example.goplot.RouteListAdapter.RouteDiff
+com.example.goplot.ItemCallback <|-- com.example.goplot.RouteListAdapter.RouteDiff
+androidx.lifecycle.AndroidViewModel <|-- com.example.goplot.ListRoutesViewModel
+androidx.appcompat.app.AppCompatActivity <|-- com.example.goplot.ListRoutesActivity
+com.example.goplot.ViewHolder <|-- com.example.goplot.RouteViewHolder
+@enduml

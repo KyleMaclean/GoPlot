@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.goplot.SingleRouteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SingleRouteActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="150dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1000"
+                android:contentDescription="@string/an_image_related_to_the_route_selected_by_the_user"
+                android:src="@{viewmodel.bitmap}"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/startTimeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.startDateTimeString}" />
+
+            <TextView
+                android:id="@+id/endTimeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.endDateTimeString}" />
+
+            <TextView
+                android:id="@+id/distanceTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.kilometreDistance}" />
+
+            <Button
+                android:id="@+id/buttonChooseImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickChooseImage"
+                android:text="@string/choose_image" />
+
+            <Button
+                android:id="@+id/buttonShowMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/show_map"
+                android:onClick="onClickShowMap" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewRateRoute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rate_route_as" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonNeutral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="@{viewmodel.rating[0]}"
+                    android:onClick="@{() -> viewmodel.onRate(0)}"
+                    android:text="@string/neutral" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonGood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="@{viewmodel.rating[1]}"
+                    android:onClick="@{() -> viewmodel.onRate(1)}"
+                    android:text="@string/good" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonBad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="@{viewmodel.rating[2]}"
+                    android:onClick="@{() -> viewmodel.onRate(2)}"
+                    android:text="@string/bad" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:hint="@string/weather_prompt"
+                android:text="@={viewmodel.description}" />
+
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:onClick="@{() -> viewmodel.onSaveDescription()}"
+                android:text="@string/save_weather_description" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

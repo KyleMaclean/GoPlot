@@ -1,0 +1,21 @@
+@startuml
+class com.example.goplot.MapsViewModel {
+- {static} float DEFAULT_ZOOM
+~ SpotDao spotDao
+- GoogleMap map
++ LiveData<List<Spot>> getSpotsForRoute(int)
++ void setupMap(GoogleMap,List<Spot>)
++ LiveData<List<Spot>> getMarkedSpots()
++ void placeMarkers(GoogleMap,List<Spot>)
+}
+class com.example.goplot.MapsActivity {
+~ MapsViewModel mapsViewModel
+# void onCreate(Bundle)
++ void onMapReady(GoogleMap)
+}
+
+
+androidx.lifecycle.AndroidViewModel <|-- com.example.goplot.MapsViewModel
+com.google.android.gms.maps.OnMapReadyCallback <|.. com.example.goplot.MapsActivity
+androidx.fragment.app.FragmentActivity <|-- com.example.goplot.MapsActivity
+@enduml

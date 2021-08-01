@@ -1,0 +1,37 @@
+@startuml
+class com.example.goplot.TrackGoalsViewModel {
+- {static} String GOAL_FILE_KEY
+- {static} String WEEKLY_GOAL_KEY
+- {static} String MONTHLY_GOAL_KEY
+- {static} int DEFAULT_WEEKLY_GOAL
+- {static} int DEFAULT_MONTHLY_GOAL
+- RouteDao routeDao
+- MutableLiveData<Integer> progressThisWeek
+- MutableLiveData<Integer> progressThisMonth
+- double distanceThisWeek
+- double distanceThisMonth
++ TrackGoalsViewModelObservable trackGoalsViewModelObservable
+- String weeklyGoalAsString
+~ SharedPreferences sharedPreferences
++ String getDistanceThisMonth()
++ String getDistanceThisWeek()
++ LiveData<Integer> getProgressThisWeek()
++ LiveData<Integer> getProgressThisMonth()
+}
+class com.example.goplot.TrackGoalsViewModel.TrackGoalsViewModelObservable {
++ String getWeeklyGoalAsString()
++ String getMonthlyGoalAsString()
++ void setMonthlyGoalAsString(String)
++ void setWeeklyGoalAsString(String)
+~ int updateGoal(String,String)
+}
+class com.example.goplot.TrackGoalsActivity {
+# void onCreate(Bundle)
+}
+
+
+androidx.lifecycle.AndroidViewModel <|-- com.example.goplot.TrackGoalsViewModel
+com.example.goplot.TrackGoalsViewModel +.. com.example.goplot.TrackGoalsViewModel.TrackGoalsViewModelObservable
+com.example.goplot.BaseObservable <|-- com.example.goplot.TrackGoalsViewModel.TrackGoalsViewModelObservable
+androidx.appcompat.app.AppCompatActivity <|-- com.example.goplot.TrackGoalsActivity
+@enduml

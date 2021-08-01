@@ -1,0 +1,22 @@
+@startuml
+class com.example.goplot.AnalyseStatisticsViewModel {
+- RouteDao routeDao
++ LiveData<List<Route>> getTop3RoutesOrderedByPace()
++ LiveData<List<Route>> getTop3RoutesOrderedByDistance()
++ LiveData<List<Route>> getAllRoutesOrderedByStartTime()
+}
+class com.example.goplot.AnalyseStatisticsActivity {
+# void onCreate(Bundle)
+}
+class com.example.goplot.AnalyseStatisticsActivity.MyValueFormatter {
+~ String[] DAYS
++ String getBarLabel(BarEntry)
++ String getAxisLabel(float,AxisBase)
+}
+
+
+androidx.lifecycle.AndroidViewModel <|-- com.example.goplot.AnalyseStatisticsViewModel
+androidx.appcompat.app.AppCompatActivity <|-- com.example.goplot.AnalyseStatisticsActivity
+com.example.goplot.AnalyseStatisticsActivity +.. com.example.goplot.AnalyseStatisticsActivity.MyValueFormatter
+com.example.goplot.ValueFormatter <|-- com.example.goplot.AnalyseStatisticsActivity.MyValueFormatter
+@enduml

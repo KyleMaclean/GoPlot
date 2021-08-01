@@ -1,0 +1,86 @@
+@startuml
+interface com.example.goplot.RecordRouteServiceCallback {
+~ void update(Location)
+}
+class com.example.goplot.RecordRouteService {
+~ {static} int LOCATION_REQUEST_INTERVAL
+~ {static} int LOW_BATTERY_LOCATION_REQUEST_INTERVAL
+~ {static} int LOCATION_SERVICE_ID
+~ {static} String START_RECORDING
+~ {static} String STOP_RECORDING
+~ IBinder myBinder
+~ RemoteCallbackList<MyBinder> remoteCallbackList
+- LocationCallback locationCallback
+~ LocationRequest locationRequest
+- BroadcastReceiver broadcastReceiver
++ void onCreate()
++ void onDestroy()
++ IBinder onBind(Intent)
++ void doCallbacks(Location)
+- void startLocationService()
+~ void createLocationRequest()
+- void stopLocationService()
++ int onStartCommand(Intent,int,int)
+}
+class com.example.goplot.RecordRouteService.MyBinder {
+~ RecordRouteServiceCallback callback
++ IBinder asBinder()
++ void registerCallback(RecordRouteServiceCallback)
+}
+class com.example.goplot.RecordRouteViewModel {
+- {static} String START_TEXT
+- {static} String STOP_TEXT
+- MutableLiveData<String> startStopButtonText
++ {static} int DEFAULT_ZOOM
+~ RouteDao routeDao
+~ SpotDao spotDao
+- MutableLiveData<Double> kilometres
+- MutableLiveData<String> time
+- MutableLiveData<Double> pace
+- MutableLiveData<Boolean> placeMarkerButtonEnabled
+- boolean started
++ Date startTime
+~ ArrayList<Spot> spots
+~ ArrayList<LatLng> latLngs
+~ ArrayList<Location> locations
+~ ArrayList<Marker> markers
+~ Date currentTime
+- double metres
+- Polyline polyline
+- GoogleMap map
++ {static} void setDouble(TextView,LiveData<Double>)
++ LiveData<Double> getPace()
++ LiveData<Double> getKilometres()
++ LiveData<String> getTime()
++ LiveData<String> getStartStopButtonText()
++ LiveData<Boolean> getPlaceMarkerButtonEnabled()
++ boolean isStarted()
++ void startRoute()
++ void stopRoute()
+- void resetUI()
++ void addLocation(Location)
++ void init(GoogleMap)
++ void onMark()
+}
+class com.example.goplot.RecordRouteActivity {
+- RecordRouteViewModel recordRouteViewModel
+~ RecordRouteServiceCallback callback
+- RecordRouteService.MyBinder myBinder
+- Intent recordRouteServiceIntent
+- ServiceConnection serviceConnection
+- void startBindService()
+- void stopUnbindService()
+# void onCreate(Bundle)
++ void onClickStartStopButton(View)
++ void onMapReady(GoogleMap)
+}
+
+
+android.app.Service <|-- com.example.goplot.RecordRouteService
+com.example.goplot.RecordRouteService +.. com.example.goplot.RecordRouteService.MyBinder
+com.example.goplot.IInterface <|.. com.example.goplot.RecordRouteService.MyBinder
+com.example.goplot.Binder <|-- com.example.goplot.RecordRouteService.MyBinder
+androidx.lifecycle.AndroidViewModel <|-- com.example.goplot.RecordRouteViewModel
+com.google.android.gms.maps.OnMapReadyCallback <|.. com.example.goplot.RecordRouteActivity
+androidx.fragment.app.FragmentActivity <|-- com.example.goplot.RecordRouteActivity
+@enduml

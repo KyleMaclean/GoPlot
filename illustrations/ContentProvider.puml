@@ -1,0 +1,129 @@
+@startuml
+class com.example.goplot.Spot {
+- double latitude
+- double longitude
+- int _id
+- int routeId
+- boolean marked
++ {static} Spot fromContentValues(ContentValues)
++ boolean isMarked()
++ void setMarked(boolean)
++ int get_id()
++ void set_id(int)
++ int getRouteId()
++ void setRouteId(int)
++ double getLatitude()
++ void setLatitude(double)
++ double getLongitude()
++ void setLongitude(double)
+}
+interface com.example.goplot.RouteDao {
+~ long insert(Route)
+~ int delete(long)
+~ int deleteAll()
+~ int update(Route)
+~ LiveData<List<Route>> getAllRoutesOrderedByStartTime()
+~ List<Route> getAllRoutesOrderedByStartTimeAsNonLiveList()
+~ Route getRouteById(int)
+~ LiveData<List<Route>> getTop3RoutesOrderedByPace()
+~ LiveData<List<Route>> getTop3RoutesOrderedByDistance()
+~ Cursor getAllRoutesAsCursor()
+~ Cursor getRouteByIdAsCursor(int)
+}
+abstract class com.example.goplot.GoPlotRoomDatabase {
+- {static} int NUMBER_OF_THREADS
++ {static} ExecutorService databaseWriteExecutor
+- {static} RoomDatabase.Callback roomDatabaseCallback
+- {static} GoPlotRoomDatabase INSTANCE
++ {static} GoPlotRoomDatabase getDatabase(Context)
++ {abstract}RouteDao routeDao()
++ {abstract}SpotDao spotDao()
+}
+class com.example.goplot.Route {
+- int _id
+- double metres
+- Date startTime
+- Date endTime
+- Uri imageUri
+- int rating
+- String description
+- double pace
++ {static} Route fromContentValues(ContentValues)
++ int getRating()
++ void setRating(int)
++ String getDescription()
++ void setDescription(String)
++ Uri getImageUri()
++ void setImageUri(Uri)
++ int get_id()
++ void set_id(int)
++ Date getStartTime()
++ void setStartTime(Date)
++ Date getEndTime()
++ void setEndTime(Date)
++ double getMetres()
++ void setMetres(double)
++ double getKilometres()
+~ double getSeconds()
+~ double getPace()
+~ void setPace(double)
++ String getRoute()
++ String getKilometresString()
++ String getStartDayDate()
++ String getStartDayDateTime()
++ String getEndDayDateTime()
+- String getDayDateTime(Date)
+}
+class com.example.goplot.GoPlotContract {
++ {static} String AUTHORITY
++ {static} Uri AUTHORITY_URI
++ {static} Uri ROUTE_URI
++ {static} Uri SPOT_URI
++ {static} String CONTENT_TYPE_SINGLE
++ {static} String CONTENT_TYPE_MULTIPLE
++ {static} String ROUTE_ID
++ {static} String ROUTE_METRES
++ {static} String ROUTE_START_TIME
++ {static} String ROUTE_END_TIME
++ {static} String ROUTE_IMAGE_URI
++ {static} String ROUTE_RATING
++ {static} String ROUTE_DESCRIPTION
++ {static} String SPOT_ID
++ {static} String SPOT_ROUTE_ID
++ {static} String SPOT_LATITUDE
++ {static} String SPOT_LONGITUDE
++ {static} String SPOT_MARKED
+}
+class com.example.goplot.GoPlotContentProvider {
+- {static} UriMatcher uriMatcher
+- {static} int ROUTE_DIR_CODE
+- {static} int SPOT_DIR_CODE
+- {static} int ROUTE_ITEM_CODE
+- {static} int SPOT_ITEM_CODE
+- RouteDao routeDao
+- SpotDao spotDao
+~ void unrecognisedUriException(Uri)
++ int delete(Uri,String,String[])
++ String getType(Uri)
++ Uri insert(Uri,ContentValues)
++ boolean onCreate()
++ Cursor query(Uri,String[],String,String[],String)
++ int update(Uri,ContentValues,String,String[])
+}
+interface com.example.goplot.SpotDao {
+~ long insert(Spot)
+~ int deleteAll()
+~ int delete(long)
+~ int update(Spot)
+~ void insertAll(List<Spot>)
+~ LiveData<List<Spot>> getSpotsForRouteIdAsLiveDataList(int)
+~ Cursor getAllSpotsAsCursor()
+~ Cursor getSpotByIdAsCursor(int)
+~ Spot getSpotById(int)
+~ LiveData<List<Spot>> getMarkedSpots()
+}
+
+
+androidx.room.RoomDatabase <|-- com.example.goplot.GoPlotRoomDatabase
+android.content.ContentProvider <|-- com.example.goplot.GoPlotContentProvider
+@enduml

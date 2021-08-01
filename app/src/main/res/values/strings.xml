@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">GoPlot</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_route_map">Map</string>
+    <string name="i_would_like_to">I would like to…</string>
+    <string name="analyse_statistics">Analyse Statistics</string>
+    <string name="show_all_markers">Show All Markers</string>
+    <string name="list_all_routes">List All Routes</string>
+    <string name="record_a_new_route">Record a New route</string>
+    <string name="place_marker">Place Marker</string>
+    <string name="time">Time:</string>
+    <string name="mm_ss">min:sec</string>
+    <string name="distance">Distance:</string>
+    <string name="km">km</string>
+    <string name="pace">Pace:</string>
+    <string name="min_km">min/km</string>
+    <string name="top_3_fastest_routes">Top 3 Fastest Routes</string>
+    <string name="top_3_longest_routes">Top 3 Longest Routes</string>
+    <string name="daily_distance_totals_this_week">Daily distance totals this week</string>
+    <string name="an_image_related_to_the_route_selected_by_the_user">An image related to the Route selected by the user</string>
+    <string name="save_weather_description">Save weather description</string>
+    <string name="weather_prompt">Type weather description here…</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="show_map">Show Map</string>
+    <string name="neutral">Neutral</string>
+    <string name="good">Good</string>
+    <string name="bad">Bad</string>
+    <string name="goplot_logo">GoPlot Logo</string>
+    <string name="track_goals">Track Goals</string>
+    <string name="distance_this_week">Distance this week</string>
+    <string name="distance_this_month">Distance this month</string>
+    <string name="weekly_distance_goal_km">Weekly distance goal (km)</string>
+    <string name="enter_weekly_goal">Enter weekly goal</string>
+    <string name="monthly_distance_goal_km">Monthly distance goal (km)</string>
+    <string name="enter_monthly_goal">Enter monthly goal</string>
+    <string name="rate_route_as">Rate Route as…</string>
+</resources>

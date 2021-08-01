@@ -1,0 +1,38 @@
+@startuml
+class com.example.goplot.SingleRouteActivity {
+- {static} int CHOOSE_IMAGE_REQUEST_CODE
+- int routeId
+- SingleRouteViewModel singleRouteViewModel
+# void onCreate(Bundle)
++ void onClickShowMap(View)
++ void onClickChooseImage(View)
+# void onActivityResult(int,int,Intent)
+}
+class com.example.goplot.SingleRouteViewModel {
+~ RouteDao routeDao
+~ SpotDao spotDao
+- MutableLiveData<boolean[]> rating
+- MutableLiveData<Bitmap> bitmap
+- MutableLiveData<String> startDateTimeString
+- MutableLiveData<String> endDateTimeString
+- MutableLiveData<String> kilometreDistance
+- ObservableField<String> description
+~ Route route
++ {static} void loadImage(ImageView,LiveData<Bitmap>)
++ LiveData<String> getStartDateTimeString()
++ LiveData<String> getEndDateTimeString()
++ LiveData<String> getKilometreDistance()
++ LiveData<Bitmap> getBitmap()
++ LiveData<boolean[]> getRating()
++ ObservableField<String> getDescription()
++ void setRoute(int)
++ void setImageUri(Uri)
+- void updateBitmap()
++ void onSaveDescription()
++ void onRate(int)
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.goplot.SingleRouteActivity
+androidx.lifecycle.AndroidViewModel <|-- com.example.goplot.SingleRouteViewModel
+@enduml

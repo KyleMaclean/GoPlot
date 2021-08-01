@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.goplot.RecordRouteViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:padding="10sp">
+
+            <TableRow
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonPlaceMarker"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="@{viewmodel.placeMarkerButtonEnabled}"
+                    android:onClick="@{() -> viewmodel.onMark()}"
+                    android:text="@string/place_marker" />
+
+                <Button
+                    android:id="@+id/buttonStartStop"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onClickStartStopButton"
+                    android:text="@{viewmodel.startStopButtonText}" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textViewTimeLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:text="@string/time"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/textViewTimeLive"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:autoSizeMaxTextSize="30sp"
+                    android:autoSizeMinTextSize="18sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:text="@{viewmodel.time}"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/textViewTimeUnits"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:text="@string/mm_ss"
+                    tools:targetApi="o" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textViewDistanceLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:text="@string/distance"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/textViewDistanceLive"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:autoSizeMaxTextSize="30sp"
+                    android:autoSizeMinTextSize="18sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:text="@{viewmodel.kilometres}"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/textViewDistanceUnits"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:text="@string/km"
+                    tools:targetApi="o" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textViewPaceLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:text="@string/pace"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/textViewPaceLive"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:autoSizeMaxTextSize="30sp"
+                    android:autoSizeMinTextSize="18sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:text="@{viewmodel.pace}"
+                    tools:targetApi="o" />
+
+                <TextView
+                    android:id="@+id/textViewPaceUnits"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:autoSizeMaxTextSize="14sp"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeStepGranularity="2sp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center_vertical"
+                    android:text="@string/min_km"
+                    tools:targetApi="o" />
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+</layout>
+
+
