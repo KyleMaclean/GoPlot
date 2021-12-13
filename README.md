@@ -55,7 +55,7 @@ In contrast, the weather description ("Sunny ☀️" in the screenshot) is kept 
 
 The first screenshot shows the first use of `MapsActivity`: to show all the Marked Spots from all Routes on the device - it is accessed by tapping "SHOW ALL MARKERS" in `MainActivity`. If `MapsActivity` is created with a Route ID in its Intent, it observes the method in `MapsViewModel` which provides all the Marked Spots. The second screenshot shows a single Route, accessed when the user taps "SHOW MAP" from `SingleRouteActivity`. Since this causes it to launch with a Route ID, `MapsActivity` observes the method in `MapsViewModel` which provides the single Route's Polyline and Marked Spots.
 
-![Maps Diagram](illustrations/maps.png)
+![Maps Diagram](illustrations/MapsDiagram.png)
 ## Analyse Statistics
 ![AnalyseStatistics Screenshot](illustrations/AnalyseStatistics-400w.png)
 
